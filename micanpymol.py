@@ -25,8 +25,7 @@ def mican(mobile, target, option=""):
 
         mican = [execute, option1, tmpmobile, tmptarget, option2, outfile]
         subprocess.run(mican)
-        # subprocess.run(["/Users/sakuma/mybin/extract_model_all.sh","out.pdb"])
-        #pymol.cmd.load(mobilepdb, "mobile")
+        
         pymol.cmd.load(outfile, "aligned")
         pymol.cmd.split_states("aligned")
         pymol.cmd.select("mobileback",mobile + " and backbone")
