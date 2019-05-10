@@ -3,34 +3,42 @@ import tempfile
 import os
 
 def mican(mobile, target, option=""):
-    
+
+
 #make temporary dir and do everything there
     with tempfile.TemporaryDirectory() as dname:
         # print tmp dir name
-        print("Temporary directory =" + dname)        
+        print("Temporary directory =" + dname)
         # make sure you have mican in PATH
-        # directly giving the full path below is a good alternative
+        # directly giving 'execute' full path below is good alternative
         execute = "mican"
         tmptarget = dname + "/target.pdb"
         tmpmobile = dname + "/mobile.pdb"
         tmpout = dname + "/aligned.pdb"
 
-        # save pdb for mican to read
+        # save pdb for mican
         pymol.cmd.save(tmptarget, target)
         pymol.cmd.save(tmpmobile, mobile)
 
-        option1 = "-" + option
+        modeoption = "-" + option
         option2 = "-o"
         outfile = tmpout
+        
 
-        mican = [execute, option1, tmpmobile, tmptarget, option2, outfile]
-        subprocess.run(mican)
+        mican = [execute, tmpmobile, tmptarget, option2, outfile]
+        for op in option.split():
+            if(op == "-o"):
+                print("option -o is reserved")
+                raise CmdException
+            mican.append(op)
+                
+        proc=subprocess.run(mican,stdout = subprocess.PIPE)
+        print(proc.stdout.decode("utf8")) # print result to pymol console
         
         pymol.cmd.load(outfile, "aligned")
         pymol.cmd.split_states("aligned")
         pymol.cmd.select("mobileback",mobile + " and backbone")
-        pymol.cmd.align("mobileback", "aligned_0001 and backbone")
-        #pymol.cmd.save("mobile_test.pdb", "mobileback")
+        pymol.cmd.pair_fit("mobileback", "aligned_0001 and backbone")
         pymol.cmd.delete("mobileback")
         pymol.cmd.delete("aligned")
         pymol.cmd.delete("aligned_0001")
