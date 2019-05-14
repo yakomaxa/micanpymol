@@ -1,5 +1,5 @@
 # micanpymol
-Wrapper to run mican from pymol
+Wrapper to run mican from pymol (currently only for pymol with python3.x)
 
 You need mican binary in your PATH. 
 
