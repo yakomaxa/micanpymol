@@ -4,6 +4,7 @@ import os
 import shutil
 
 class TemporaryDirectory(object):
+    # For Python2: taken from https://qiita.com/everylittle/items/aa7c6f612ff0a9db7f01 
     def __init__(self, suffix="", prefix="tmp", dir=None):
         self.__name = tempfile.mkdtemp(suffix, prefix, dir)
     def __enter__(self):
