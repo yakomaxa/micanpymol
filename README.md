@@ -9,6 +9,8 @@ First, load this script:
 Then run mican on pymol:
  mican protein1, protein2, -R -i 3 -m matrix.txt -a align.txt
 
+For older pymol running on python2, use micanpymol_python2.py instead.
+
 ## About Mican
 Mican is a protein structure alignment program by Shintaro Minami et.al.
 
