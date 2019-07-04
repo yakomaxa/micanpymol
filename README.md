@@ -16,6 +16,14 @@ Then run mican on pymol:
 Something around temporary directories differs between python3 and python2.
 For older pymol running on python2, use micanpymol_python2.py instead.
 
+## What's inside
+
+* Selections are output into two temp files.
+* Mican superposes them.
+* Script load mican-output pdb as dummy.
+* Script aligns the original object to the dummy pdb.
+* Dummies are deleted.
+
 ## About MICAN
 Mican is a protein structure alignment program by Shintaro Minami et.al.
 

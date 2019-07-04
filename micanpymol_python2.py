@@ -57,7 +57,10 @@ def mican(mobile, target, option=""):
         pymol.cmd.load(outfile, "aligned")
         pymol.cmd.split_states("aligned")
         pymol.cmd.select("mobileback",mobile + " and backbone")
-        pymol.cmd.pair_fit("mobileback", "aligned_0001 and backbone")
+        pymol.cmd.align("mobileback", "aligned_0001 and backbone")
+        # use cmd pair_fit if you think align is not good
+        # print("Using cmd.align instead of cmd.pair_fit")
+        # pymol.cmd.pair_fit("mobileback", "aligned_0001 and backbone")
         pymol.cmd.delete("mobileback")
         pymol.cmd.delete("aligned")
         pymol.cmd.delete("aligned_0001")
