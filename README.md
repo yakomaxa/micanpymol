@@ -1,6 +1,9 @@
 # micanpymol
 This is a wrapper to run mican from pymol.
 
+* micanpymol.py / for python3-based pymol
+* micanpymol_python2.py / for python2-based pymol
+
 ## Requirements
 
 You need mican binary in your PATH.
@@ -18,6 +21,7 @@ Then run mican on pymol:
  ```mican protein1, protein2, -R -i 3 -m matrix.txt -a align.txt```
 
 Something around temporary directories differs between python3 and python2.
+
 For older pymol running on python2, use micanpymol_python2.py instead.
 
 ## What's inside
