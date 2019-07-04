@@ -47,7 +47,7 @@ def mican(mobile, target, option=""):
                 raise CmdException
             mican.append(op)
                 
-#        proc=subprocess.Popen(mican,stdout = subprocess.PIPE)
+#       proc=subprocess.Popen(mican,stdout = subprocess.PIPE)
         proc=subprocess.check_call(mican)
         #proc=subprocess.Popen(mican)
         #print(proc.stdout.decode("utf8")) # print result to pymol console
