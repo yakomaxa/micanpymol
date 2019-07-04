@@ -35,7 +35,7 @@ http://www.tbp.cse.nagoya-u.ac.jp/MICAN/
 
 Reference
 
-* MICAN: a protein structure alignment algorithm that can handle Multiple-chains, Inverse alignments, C α only models, Alternative alignments, and Non-sequential alignments
+* MICAN: a protein structure alignment algorithm that can handle Multiple-chains, Inverse alignments, Cα only models, Alternative alignments, and Non-sequential alignments
 * http://www.biomedcentral.com/1471-2105/14/24/abstract
 
 * MICAN-SQ: a sequential protein structure alignment program that is applicable to monomers and all types of oligomers
