@@ -27,6 +27,7 @@ def mican(mobile, target, option=""):
         # print(os.path.exists(dname))
         # make sure you have mican in PATH
         # directly giving 'execute' full path below is good alternative
+        # For example : execute = "/usr/bin/mican"  
         execute = "mican"
         tmptarget = dname + "/target.pdb"
         tmpmobile = dname + "/mobile.pdb"

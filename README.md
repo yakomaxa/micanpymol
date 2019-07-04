@@ -1,7 +1,7 @@
 # micanpymol
 Wrapper to run mican from pymol (currently only for pymol with python3.x)
 
-You need mican binary in your PATH. 
+You need mican binary in your PATH. If you launch pymol from GUI, PATH variable may differ from ones launched from CUI. So it's better to give the full-path for mican inside the script.
 
 First, load this script:
  run micanpymol.py
