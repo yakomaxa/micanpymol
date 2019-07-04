@@ -1,14 +1,19 @@
 # micanpymol
-Wrapper to run mican from pymol (currently only for pymol with python3.x)
+This is a wrapper to run mican from pymol.
 
-You need mican binary in your PATH. If you launch pymol from GUI, PATH variable may differ from ones launched from CUI. So it's better to give the full-path for mican inside the script.
+You need mican binary in your PATH.
+
+If you launch pymol from GUI, PATH variable may differ from ones launched from CUI.
+
+So it's better to give the full-path for mican inside the script.
 
 First, load this script:
- run micanpymol.py
+ ```run micanpymol.py```
 
 Then run mican on pymol:
- mican protein1, protein2, -R -i 3 -m matrix.txt -a align.txt
+ ```mican protein1, protein2, -R -i 3 -m matrix.txt -a align.txt```
 
+Something around temporary directories differs between python3 and python2.
 For older pymol running on python2, use micanpymol_python2.py instead.
 
 ## About MICAN
