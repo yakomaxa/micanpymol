@@ -11,7 +11,7 @@ Then run mican on pymol:
 
 For older pymol running on python2, use micanpymol_python2.py instead.
 
-## About Mican
+## About MICAN
 Mican is a protein structure alignment program by Shintaro Minami et.al.
 
 http://www.tbp.cse.nagoya-u.ac.jp/MICAN/
