@@ -39,7 +39,7 @@ https://opensource.org/licenses/mit-license.php
 
 
 ## About MICAN
-Mican is a protein structure alignment program by Shintaro Minami et.al.
+Mican is a protein structure alignment program by Dr. Shintaro Minami et al.
 
 http://www.tbp.cse.nagoya-u.ac.jp/MICAN/
 
