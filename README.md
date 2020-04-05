@@ -32,6 +32,10 @@ For older pymol running on python2, use micanpymol_python2.py instead.
 * Script aligns the original object to the dummy pdb.
 * Dummies are deleted.
 
+## License
+MIT License
+Author Koya.S
+
 ## About MICAN
 Mican is a protein structure alignment program by Shintaro Minami et.al.
 
