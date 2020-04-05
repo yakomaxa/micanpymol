@@ -33,8 +33,10 @@ For older pymol running on python2, use micanpymol_python2.py instead.
 * Dummies are deleted.
 
 ## License
-MIT License
-Author Koya.S
+Copyright (c) 2020 Koya.S
+Released under the MIT license
+https://opensource.org/licenses/mit-license.php
+
 
 ## About MICAN
 Mican is a protein structure alignment program by Shintaro Minami et.al.
