@@ -5,7 +5,7 @@ This is a wrapper to run mican from pymol.
 * micanpymol_python2.py / for python2-based pymol
 
 ## Update 2022-22-May
-Auto-zooming after loading the dummy structures, which had made the camera-focus moves unwantedly,  was suppressed.
+Auto-zooming after loading the dummy structures, which had made the camera-focus move unwantedly,  was suppressed.
 
 ## Requirements
 
