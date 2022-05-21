@@ -22,6 +22,10 @@ def mican(mobile, target, option=""):
 
 #make temporary dir and do everything there
     with TemporaryDirectory() as dname:
+        #turn off zooming when loading: set auto_zoom, off
+        old_auto_zoom=cmd.get("auto_zoom")
+        cmd.set("auto_zoom","off")
+        
         # print tmp dir name
         print("Temporary directory =" + dname)
         # print(os.path.exists(dname))
@@ -66,6 +70,9 @@ def mican(mobile, target, option=""):
         pymol.cmd.delete("aligned_0001")
         pymol.cmd.delete("aligned_0002")
         # pymol.cmd.quit()
+
+        # reset auto_zoom as you had set
+        cmd.set("auto_zoom",old_auto_zoom)
 
 pymol.cmd.extend("mican", mican)
 cmd.auto_arg[0]['mican'] = cmd.auto_arg[0]['align']

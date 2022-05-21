@@ -4,6 +4,9 @@ This is a wrapper to run mican from pymol.
 * micanpymol.py / for python3-based pymol
 * micanpymol_python2.py / for python2-based pymol
 
+## Update 2022-22-May
+Auto-zooming after loading the dummy structures, which had made the camera-focus moves unwantedly,  was suppressed.
+
 ## Requirements
 
 You need mican binary in your PATH.
