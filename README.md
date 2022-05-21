@@ -22,9 +22,11 @@ First, load this script:
 
 Then run mican on pymol:
 basic usage
+
  ```mican protein1, protein2```
  
-with options (check Mican's help for options)
+With options (check Mican's help for options)
+
  ```mican protein1, protein2, -R -i 3 -m matrix.txt -a align.txt```
  
 Something around temporary directories differs between python3 and python2.
