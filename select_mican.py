@@ -69,6 +69,9 @@ def get_selection(output_str: str, chain_indexes, mode="target"):
 
     sele1 = " or ".join(sele1)
     sele2 = " or ".join(sele2)
+
+    print(sele1)
+    print(sele2)
     return sele1, sele2
 
 def mican_select(mobile, target, selection, mode="mobile", option=""):
@@ -109,7 +112,7 @@ def mican_select(mobile, target, selection, mode="mobile", option=""):
         if len(sele_m) == 0 or len(sele_t) == 0:
             print("No selection found")
             return
-            
+
         pymol.cmd.load(outfile, "aligned")
         pymol.cmd.split_states("aligned")
         pymol.cmd.select("mobileback", mobile + " and backbone")
@@ -118,13 +121,82 @@ def mican_select(mobile, target, selection, mode="mobile", option=""):
         pymol.cmd.delete("aligned")
         pymol.cmd.delete("aligned_0001")
         pymol.cmd.delete("aligned_0002")
-        name1 = pymol.cmd.get_unused_name("aligned")
-        pymol.cmd.select(name1, mobile + " and " + sele_m)
-        name2 = pymol.cmd.get_unused_name("aligned")
-        pymol.cmd.select(name2, target + " and " + sele_t)
+
+        name2 = pymol.cmd.get_unused_name("selection_")
+        pymol.cmd.select(name2, target + " and (" + sele_t + ")")
+        name1 = pymol.cmd.get_unused_name("selection_")
+        pymol.cmd.select(name1, mobile + " and (" + sele_m + ")")
         # pymol.cmd.quit()
+
+def mican_select_all(target=None, selection="all", mode="target", option=""):
+    # make temporary dir and do everything there
+    with tempfile.TemporaryDirectory() as dname:
+        execute = "/Users/sakuma/mybin/mican"
+
+        if target is None:
+            target = pymol.cmd.get_object_list()[0]
+
+        tmptarget = dname + "/target.pdb"
+        pymol.cmd.save(tmptarget, target)
+        count = 0
+
+        for mobile in pymol.cmd.get_object_list():
+            tmpmobile = dname + "/mobile.pdb"
+            tmpout = dname + "/aligned.pdb"
+
+            # save pdb for mican
+            pymol.cmd.save(tmpmobile, mobile)
+
+            modeoption = "-" + option
+            option2 = "-z -o"
+            outfile = tmpout
+
+            mican = [execute, tmpmobile, tmptarget, option2, outfile]
+            for op in option.split():
+                if (op == "-o"):
+                    print("option -o is reserved")
+                    raise CmdException
+                mican.append(op)
+
+            proc = subprocess.run(mican, stdout=subprocess.PIPE)
+            print(proc.stdout.decode("utf8"))  # print result to pymol console
+            lines = proc.stdout.decode("utf8")
+            stored.ca_cr = []
+            if mode == "mobile":
+                tmpsel = mobile + " and " + selection
+                pymol.cmd.iterate(tmpsel + " and name ca", "stored.ca_cr.append([chain,resi])")
+                sele_m, sele_t = get_selection(output_str=lines, chain_indexes=stored.ca_cr, mode="mobile")
+            elif mode == "target":
+                tmpsel = target + " and " + selection
+                pymol.cmd.iterate(tmpsel + " and name ca", "stored.ca_cr.append([chain,resi])")
+                sele_m, sele_t = get_selection(output_str=lines, chain_indexes=stored.ca_cr, mode="target")
+            if len(sele_m) == 0 or len(sele_t) == 0:
+                print("No selection found")
+                continue
+
+            pymol.cmd.load(outfile, "aligned")
+            pymol.cmd.split_states("aligned")
+            pymol.cmd.select("mobileback", mobile + " and backbone")
+            pymol.cmd.align("mobileback", "aligned_0001 and backbone")
+            pymol.cmd.delete("mobileback")
+            pymol.cmd.delete("aligned")
+            pymol.cmd.delete("aligned_0001")
+            pymol.cmd.delete("aligned_0002")
+            if count == 0:
+                name2 = pymol.cmd.get_unused_name("selection_")
+                pymol.cmd.select(name2, target + " and (" + sele_t + ")")
+                count = count + 1
+            name1 = pymol.cmd.get_unused_name("selection_")
+            pymol.cmd.select(name1, mobile + " and (" + sele_m + ")")
+
+        # pymol.cmd.quit()
+
 
 pymol.cmd.extend("select_mican", mican_select)
 cmd.auto_arg[0]['select_mican'] = cmd.auto_arg[0]['align']
 cmd.auto_arg[1]['select_mican'] = cmd.auto_arg[1]['align']
 cmd.auto_arg[2]['select_mican'] = cmd.auto_arg[1]['select']
+
+pymol.cmd.extend("select_mican_all", mican_select_all)
+cmd.auto_arg[0]['select_mican_all'] = cmd.auto_arg[0]['align_all']
+cmd.auto_arg[1]['select_mican_all'] = cmd.auto_arg[1]['select']
