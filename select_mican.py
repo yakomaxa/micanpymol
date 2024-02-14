@@ -70,8 +70,6 @@ def get_selection(output_str: str, chain_indexes, mode="target"):
     sele1 = " or ".join(sele1)
     sele2 = " or ".join(sele2)
 
-    print(sele1)
-    print(sele2)
     return sele1, sele2
 
 def mican_select(mobile, target, selection, mode="mobile", option=""):
