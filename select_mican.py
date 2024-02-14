@@ -77,6 +77,10 @@ def get_selection(output_str: str, chain_indexes, mode="target"):
 def mican_select(mobile, target, selection, mode="mobile", option=""):
     # make temporary dir and do everything there
     with tempfile.TemporaryDirectory() as dname:
+        #turn off zooming when loading: set auto_zoom, off    
+        old_auto_zoom=cmd.get("auto_zoom")
+        cmd.set("auto_zoom","off")
+        
         execute = "/Users/sakuma/mybin/mican"
         tmptarget = dname + "/target.pdb"
         tmpmobile = dname + "/mobile.pdb"
@@ -126,11 +130,16 @@ def mican_select(mobile, target, selection, mode="mobile", option=""):
         pymol.cmd.select(name2, target + " and (" + sele_t + ")")
         name1 = pymol.cmd.get_unused_name("selection_")
         pymol.cmd.select(name1, mobile + " and (" + sele_m + ")")
+        cmd.set("auto_zoom",old_auto_zoom)
         # pymol.cmd.quit()
 
 def mican_select_all(target=None, selection="all", mode="target", option=""):
     # make temporary dir and do everything there
     with tempfile.TemporaryDirectory() as dname:
+        #turn off zooming when loading: set auto_zoom, off    
+        old_auto_zoom=cmd.get("auto_zoom")
+        cmd.set("auto_zoom","off")
+
         execute = "/Users/sakuma/mybin/mican"
 
         if target is None:
@@ -190,6 +199,7 @@ def mican_select_all(target=None, selection="all", mode="target", option=""):
             pymol.cmd.select(name1, mobile + " and (" + sele_m + ")")
 
         # pymol.cmd.quit()
+        cmd.set("auto_zoom",old_auto_zoom)
 
 
 pymol.cmd.extend("select_mican", mican_select)
