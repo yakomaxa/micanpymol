@@ -198,5 +198,5 @@ cmd.auto_arg[1]['select_mican'] = cmd.auto_arg[1]['align']
 cmd.auto_arg[2]['select_mican'] = cmd.auto_arg[1]['select']
 
 pymol.cmd.extend("select_mican_all", mican_select_all)
-cmd.auto_arg[0]['select_mican_all'] = cmd.auto_arg[0]['align_all']
+cmd.auto_arg[0]['select_mican_all'] = cmd.auto_arg[0]['align']
 cmd.auto_arg[1]['select_mican_all'] = cmd.auto_arg[1]['select']
